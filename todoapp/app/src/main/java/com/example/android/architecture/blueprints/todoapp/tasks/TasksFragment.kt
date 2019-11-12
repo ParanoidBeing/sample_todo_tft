@@ -115,7 +115,7 @@ class TasksFragment : Fragment() {
         activity?.findViewById<FloatingActionButton>(R.id.fab_add_task)?.let {
             it.setImageResource(R.drawable.ic_add)
             it.setOnClickListener {
-                viewDataBinding.viewmodel?.addNewTask()
+
             }
         }
     }

@@ -48,8 +48,6 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        setupNavigationDrawer()
-
         setupViewFragment()
 
         viewModel = obtainViewModel().apply {
@@ -73,14 +71,6 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
             ?: replaceFragmentInActivity(TasksFragment.newInstance(), R.id.contentFrame)
     }
 
-    private fun setupNavigationDrawer() {
-        drawerLayout = (findViewById<DrawerLayout>(R.id.drawer_layout))
-            .apply {
-                setStatusBarBackground(R.color.colorPrimaryDark)
-            }
-        setupDrawerContent(findViewById(R.id.nav_view))
-    }
-
     override fun onOptionsItemSelected(item: MenuItem) =
             when (item.itemId) {
                 android.R.id.home -> {
@@ -90,26 +80,6 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
                 }
                 else -> super.onOptionsItemSelected(item)
             }
-
-    private fun setupDrawerContent(navigationView: NavigationView) {
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.list_navigation_menu_item -> {
-                    // Do nothing, we're already on that screen
-                }
-                R.id.statistics_navigation_menu_item -> {
-                    val intent = Intent(this@TasksActivity, StatisticsActivity::class.java).apply {
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    }
-                    startActivity(intent)
-                }
-            }
-            // Close the navigation drawer when an item is selected.
-            menuItem.isChecked = true
-            drawerLayout.closeDrawers()
-            true
-        }
-    }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         viewModel.handleActivityResult(requestCode, resultCode)
