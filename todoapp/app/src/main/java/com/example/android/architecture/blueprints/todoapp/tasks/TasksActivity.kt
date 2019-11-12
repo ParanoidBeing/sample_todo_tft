@@ -116,7 +116,7 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
 
     override fun openTaskDetails(taskId: String) {
         val intent = Intent(this, TaskDetailActivity::class.java).apply {
-            putExtra(TaskDetailActivity.EXTRA_TASK_ID, taskId)
+
         }
         startActivityForResult(intent, AddEditTaskActivity.REQUEST_CODE)
 
